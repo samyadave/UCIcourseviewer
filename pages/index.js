@@ -1,3 +1,5 @@
+import { GET_COURSE } from '@/backend/queries'
+import { useQuery } from '@apollo/client'
 import {
   Button,
   Card,
@@ -11,10 +13,12 @@ import {
 import PageLayout from '../components/PageLayout'
 
 const Home = () => {
+  const { data, loading } = useQuery(GET_COURSE)
   return (
     <PageLayout>
       <Container>
         <Button>Button Test</Button>
+        <p>{data?.title}</p>
         <Card style={{ width: '18rem' }}>
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
