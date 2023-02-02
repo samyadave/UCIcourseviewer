@@ -1,4 +1,4 @@
-import { GET_COURSE } from '@/backend/queries'
+import { GET_COURSE, SCHEDULE } from '@/backend/queries'
 import { useQuery } from '@apollo/client'
 import {
   Button,
@@ -13,23 +13,35 @@ import {
 import PageLayout from '../components/PageLayout'
 
 const Home = () => {
-  const { data, loading } = useQuery(GET_COURSE)
+  const { data, loading } = useQuery(SCHEDULE)
+
   return (
     <PageLayout>
       <Container>
-        <Button>Button Test</Button>
-        <p>{data?.title}</p>
-        <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <Row xs={1} md={3} className="g-2">
+            {data?.result.map((c) => (
+              <Col key={c.section.code}>
+                <Card style={{ width: '18rem' }}>
+                  <Card.Body>
+                    <Card.Title>{c.course.title}</Card.Title>
+                  </Card.Body>
+                  <ListGroup className="list-group-flush">
+                    <ListGroup.Item>{c.section.type}</ListGroup.Item>
+                    <ListGroup.Item>{c.section.code}</ListGroup.Item>
+                    <ListGroup.Item>
+                      {c.instructors.map((instructor) => (
+                        <p>{instructor.name}</p>
+                      ))}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
       </Container>
     </PageLayout>
   )
