@@ -1,5 +1,7 @@
 import { GET_COURSE, SCHEDULE } from '@/backend/queries'
 import { useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
+
 import {
   Button,
   Card,
@@ -10,17 +12,24 @@ import {
   Row,
 } from 'react-bootstrap'
 
-import PageLayout from '../components/PageLayout'
+import PageLayout from '../../components/PageLayout'
 
 const DeptPage = () => {
   const router = useRouter()
   const { title } = router.query
 
-  const { data, loading } = useQuery(SCHEDULE)
+  const { data, loading } = useQuery(SCHEDULE, {
+    variables: {
+      year: 2023,
+      quarter: 'Winter',
+      department: title,
+    },
+  })
 
   return (
     <PageLayout>
       <Container>
+        <p>{title}</p>
         {loading ? (
           <p>Loading...</p>
         ) : (

@@ -1,5 +1,6 @@
 import { DEPTS } from '@/backend/queries'
 import { useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
 import {
   Button,
   Card,
@@ -14,15 +15,19 @@ import PageLayout from '../components/PageLayout'
 
 const Home = () => {
   const { data, loading } = useQuery(DEPTS)
-  const deptsSet =  new Set()
-  data?.result.map((course) => (
-    deptsSet.add(course.department_name)
-  ))
+
+  const router = useRouter()
+
+  const deptsSet = new Set() // check comparator so Set knows how to find duplicates
+  data?.result.map((course) =>
+    deptsSet.add({
+      deptName: course.department_name,
+      deptId: course.department,
+    })
+  )
+
   const deptsArr = Array.from(deptsSet)
-  console.log("DeptsSet: ")
-  console.log(deptsSet)
-  console.log("DeptsArr: ")
-  console.log(deptsArr)
+
   return (
     <PageLayout>
       <Container>
@@ -31,12 +36,12 @@ const Home = () => {
         ) : (
           <Row xs={1} md={3} className="g-2">
             {deptsArr.map((dept) => (
-            <Col key={dept}>
-              <Card>
-                <Card.Title>{dept}</Card.Title>
-              </Card>
-            </Col>
-          ))}
+              <Col key={dept.deptId}>
+                <Card onClick={() => router.push(`../depts/${dept.deptId}`)}>
+                  <Card.Title>{dept.deptName}</Card.Title>
+                </Card>
+              </Col>
+            ))}
           </Row>
         )}
       </Container>
@@ -45,18 +50,3 @@ const Home = () => {
 }
 
 export default Home
-
-// {/* <PageLayout>
-//       <Container>
-//         <Row xs={1} md={3} className="g-2">
-//           {/* map -> does an intended function for each item in array */}
-//           {arr.map((dept) => (
-//             <Col key={dept.department_name}>
-//               <Card>
-//                 <Card.Title>{dept.department_name}</Card.Title>
-//               </Card>
-//             </Col>
-//           ))}
-//         </Row>
-//       </Container>
-// /PageLayout> */}

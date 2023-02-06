@@ -28,8 +28,12 @@ export const GET_COURSE = gql`
 `
 
 export const SCHEDULE = gql`
-  query Schedule {
-    result: schedule(year: 2023, quarter: "Winter", department: "IN4MATX") {
+  query Schedule(
+    $year: Float = 2023
+    $quarter: String = "Winter"
+    $department: String
+  ) {
+    result: schedule(year: $year, quarter: $quarter, department: $department) {
       instructors {
         name
       }
@@ -61,6 +65,7 @@ export const DEPTS = gql`
   query AllCourses {
     result: allCourses {
       department_name
+      department
     }
   }
 `
