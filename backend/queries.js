@@ -56,3 +56,11 @@ export const SCHEDULE = gql`
     }
   }
 `
+
+export const DEPTS = gql`
+  query AllCourses {
+    result: allCourses {
+      department_name
+    }
+  }
+`
