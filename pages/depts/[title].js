@@ -18,12 +18,13 @@ const DeptPage = () => {
   const router = useRouter()
   const { title } = router.query
 
-  const { data, loading } = useQuery(SCHEDULE, {
+  const { loading, data } = useQuery(SCHEDULE, {
     variables: {
       year: 2023,
       quarter: 'Winter',
       department: title,
     },
+    errorPolicy: "all"
   })
 
   return (
@@ -38,7 +39,7 @@ const DeptPage = () => {
               <Col key={c.section.code}>
                 <Card style={{ width: '18rem' }}>
                   <Card.Body>
-                    <Card.Title>{c.course.title}</Card.Title>
+                    <Card.Title>{c.course?.title}</Card.Title>
                   </Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroup.Item>{c.section.type}</ListGroup.Item>

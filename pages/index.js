@@ -18,11 +18,11 @@ const Home = () => {
 
   const router = useRouter()
 
-  const deptsMap = new Map() // check comparator so Set knows how to find duplicates
+  const deptsMap = new Map()
   data?.result.map((course) =>
     deptsMap.set(
       course.department_name,
-      course.department,
+      course.department
     )
   )
 
@@ -37,7 +37,7 @@ const Home = () => {
           <Row xs={1} md={3} className="g-2">
             {deptsArr.map((dept) => (
               <Col key={deptsMap.get(dept)}>
-                <Card onClick={() => router.push(`../depts/${deptsMap.get(dept)}`)}>
+                <Card onClick={() => router.push(`../depts/${deptsMap.get(dept), encodeURIComponent(deptsMap.get(dept))}`)}>
                   <Card.Title>{dept}</Card.Title>
                 </Card>
               </Col>
