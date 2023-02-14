@@ -4,7 +4,7 @@
   
 }
 .page-body {
-  background-color: black;
+  // background-color: black;
   // height: 100vh;
 }
 
@@ -15,4 +15,12 @@
   width: 100%;
   text-align: center;
   background-color: rgb(94, 94, 94);
+}
+
+.search-bar{
+  margin-top: 50;  
+}
+
+.browse-button{
+  font-size: large;
 }

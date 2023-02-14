@@ -1,3 +1,5 @@
+// INDIVIDUAL DEPARTMENT PAGE - ALL COURSES IN DEPT
+
 import { GET_COURSE, SCHEDULE } from '@/backend/queries'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
@@ -24,7 +26,7 @@ const DeptPage = () => {
       quarter: 'Winter',
       department: title,
     },
-    errorPolicy: "all"
+    errorPolicy: 'all',
   })
 
   return (

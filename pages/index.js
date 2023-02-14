@@ -1,3 +1,5 @@
+// HOME PAGE
+
 import { DEPTS } from '@/backend/queries'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
@@ -6,6 +8,7 @@ import {
   Card,
   Col,
   Container,
+  Form,
   ListGroup,
   ListGroupItem,
   Row,
@@ -20,10 +23,7 @@ const Home = () => {
 
   const deptsMap = new Map()
   data?.result.map((course) =>
-    deptsMap.set(
-      course.department_name,
-      course.department
-    )
+    deptsMap.set(course.department_name, course.department)
   )
 
   const deptsArr = Array.from(deptsMap.keys())
@@ -31,19 +31,20 @@ const Home = () => {
   return (
     <PageLayout>
       <Container>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <Row xs={1} md={3} className="g-2">
-            {deptsArr.map((dept) => (
-              <Col key={deptsMap.get(dept)}>
-                <Card onClick={() => router.push(`../depts/${deptsMap.get(dept), encodeURIComponent(deptsMap.get(dept))}`)}>
-                  <Card.Title>{dept}</Card.Title>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
+        <Row>
+          <Form.Group
+            className="mb-3"
+            controlId="formBasicEmail"
+            style={{ marginTop: 250 }}
+          >
+            <Form.Control type="email" placeholder="Search" />
+          </Form.Group>
+        </Row>{' '}
+        <Row>
+          <Button variant="primary" className="browse-button">
+            Browse
+          </Button>{' '}
+        </Row>
       </Container>
     </PageLayout>
   )
