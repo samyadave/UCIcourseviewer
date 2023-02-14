@@ -1,6 +1,7 @@
 // INDIVIDUAL DEPARTMENT PAGE - ALL COURSES IN DEPT
 
 import { GET_COURSE, SCHEDULE } from '@/backend/queries'
+import Course from '@/components/Course'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
@@ -12,6 +13,7 @@ import {
   ListGroup,
   ListGroupItem,
   Row,
+  Stack,
 } from 'react-bootstrap'
 
 import PageLayout from '../../components/PageLayout'
@@ -29,33 +31,91 @@ const DeptPage = () => {
     errorPolicy: 'all',
   })
 
+  const courseTitles = new Set()
+  const courseMap = new Map()
+  data?.result.map((course) => {
+    courseTitles.add(course.course.title)
+    courseMap.set(
+      course.course.title,
+      course.course.department + ' ' + course.course.number
+    )
+  })
+
+  const courseArry = Array.from(courseTitles)
+
   return (
     <PageLayout>
       <Container>
-        <p>{title}</p>
+        <h1>{title}</h1>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <Row xs={1} md={3} className="g-2">
-            {data?.result.map((c) => (
-              <Col key={c.section.code}>
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title>{c.course?.title}</Card.Title>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroup.Item>{c.section.type}</ListGroup.Item>
-                    <ListGroup.Item>{c.section.code}</ListGroup.Item>
-                    <ListGroup.Item>
-                      {c.instructors.map((instructor) => (
-                        <p>{instructor.name}</p>
-                      ))}
-                    </ListGroup.Item>
-                  </ListGroup>
-                </Card>
-              </Col>
+          <Stack gap={4}>
+            {courseArry.map((c) => (
+              <Card style={{ width: '100' }} key={c}>
+                <Card.Header>{courseMap.get(c) + ' - ' + c}</Card.Header>
+                <ListGroup
+                  horizontal
+                  style={{ width: '95%', textAlign: 'center' }}
+                >
+                  <Col xs={1}>Section</Col>
+                  <Col xs={2}>CRN</Col>
+                  <Col xs={2}>Days</Col>
+                  <Col xs={2}>Time</Col>
+                  <Col xs={2}>Building</Col>
+                  <Col xs={2}>Instructors</Col>
+                </ListGroup>
+                {data?.result.map((e) => {
+                  return e.course.title == c ? (
+                    <>
+                      <ListGroup
+                        horizontal
+                        className="list-group-flush"
+                        style={{ width: '100v' }}
+                      >
+                        {/* <ListGroup.Item>{e.course.title}</ListGroup.Item> */}
+                        <Col xs={1}>
+                          <ListGroup.Item>{e.section.type}</ListGroup.Item>
+                        </Col>
+                        <Col xs={2}>
+                          <ListGroup.Item>{e.section.code}</ListGroup.Item>
+                        </Col>
+                        <Col xs={2}>
+                          <ListGroup.Item>
+                            {e.meetings.map((m) => m.days)}
+                          </ListGroup.Item>
+                        </Col>
+                        <Col xs={2}>
+                          <ListGroup.Item>
+                            {e.meetings.map((m) => m.time)}
+                          </ListGroup.Item>
+                        </Col>
+                        <Col xs={2}>
+                          <ListGroup.Item>
+                            {e.meetings.map((m) => m.building)}
+                          </ListGroup.Item>
+                        </Col>
+                        <Col xs={'3'}>
+                          <ListGroup.Item>
+                            {e.instructors.at(0).name == null &&
+                            e.instructors.at(-1).name == null ? (
+                              <p>Not available</p>
+                            ) : (
+                              <>
+                                {e.instructors.map((instructor) => (
+                                  <p>{instructor?.name}</p>
+                                ))}
+                              </>
+                            )}
+                          </ListGroup.Item>
+                        </Col>
+                      </ListGroup>
+                    </>
+                  ) : null
+                })}
+              </Card>
             ))}
-          </Row>
+          </Stack>
         )}
       </Container>
     </PageLayout>

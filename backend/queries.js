@@ -40,6 +40,8 @@ export const SCHEDULE = gql`
       course {
         id
         title
+        number
+        department
         prerequisite_list {
           id
           title
@@ -66,6 +68,7 @@ export const DEPTS = gql`
     result: allCourses {
       department_name
       department
+      school
     }
   }
 `

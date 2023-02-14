@@ -1,32 +1,11 @@
 // HOME PAGE
-
-import { DEPTS } from '@/backend/queries'
-import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  Row,
-} from 'react-bootstrap'
+import { Button, Container, Form, Row } from 'react-bootstrap'
 
 import PageLayout from '../components/PageLayout'
 
 const Home = () => {
-  const { data, loading } = useQuery(DEPTS)
-
   const router = useRouter()
-
-  const deptsMap = new Map()
-  data?.result.map((course) =>
-    deptsMap.set(course.department_name, course.department)
-  )
-
-  const deptsArr = Array.from(deptsMap.keys())
 
   return (
     <PageLayout>
@@ -39,9 +18,13 @@ const Home = () => {
           >
             <Form.Control type="email" placeholder="Search" />
           </Form.Group>
-        </Row>{' '}
+        </Row>
         <Row>
-          <Button variant="primary" className="browse-button">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => router.push('departments')}
+          >
             Browse
           </Button>{' '}
         </Row>
