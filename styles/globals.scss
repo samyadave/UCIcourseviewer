@@ -1,11 +1,8 @@
-
-
 .page-header {
-  
 }
 .page-body {
-  // background-color: black;
-  // height: 100vh;
+  background-color: #202124;
+  height: 100%;
 }
 
 .page-footer {
@@ -18,10 +15,24 @@
   background-color: rgb(94, 94, 94);
 }
 
-.search-bar{
-  margin-top: 50;  
+.search-bar {
+  margin-top: 50;
 }
 
-.browse-button{
+.browse-button {
   font-size: large;
+}
+
+.course-cards:nth-child(even) {
+  background-color: #252829;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.course-cards:nth-child(odd) {
+  background-color: #2b2d2e;
+}
+
+.list-field:nth-child(odd) {
+  background-color: #2e3031;
 }
