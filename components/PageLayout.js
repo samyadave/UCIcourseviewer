@@ -4,26 +4,34 @@ const PageLayout = ({ children }) => {
   return (
     <>
       <div className="page-header">
-        <Navbar bg="dark" expand="lg">
+        <Navbar expand="lg">
           <Container>
-            <Navbar.Brand href="/" style={{ color: 'white' }}>
-              Course Viewer
+            <Navbar.Brand
+              href="/"
+              className="title"
+              style={{ color: 'rgb(189, 193, 197)' }}
+            >
+              UCI Course Viewer
             </Navbar.Brand>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="#home" style={{ color: 'white' }}>
-                  Home
-                </Nav.Link>
-                <Nav.Link href="#link" style={{ color: 'white' }}>
-                  Link
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
+            <Nav justify="right">
+              <Nav.Link
+                onClick={() =>
+                  window.open(
+                    'https://github.com/samyadave/UCIcourseviewer',
+                    '_blank'
+                  )
+                }
+                style={{ color: 'rgb(189, 193, 197)' }}
+              >
+                {' '}
+                Github
+              </Nav.Link>
+            </Nav>
           </Container>
         </Navbar>
       </div>
       <div className="page-body">{children}</div>
-      <div className="page-footer">Course-Viewer</div>
+      <div className="page-footer">Made by The Best Team </div>
     </>
   )
 }

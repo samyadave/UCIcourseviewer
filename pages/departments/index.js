@@ -1,21 +1,19 @@
 // SORT ALL DEPTS BY SCHOOL
 
 import { DEPTS } from '@/backend/queries'
+import Dept from '@/components/Dept'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { Card, Col, Container, Row } from 'react-bootstrap'
-import PageLayout from '../components/PageLayout'
+import { ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
+import PageLayout from '../../components/PageLayout'
+// import './index.scss'
+
+const textWhite = 'rgb(189,193,197)'
 
 const DeptPage = () => {
   const { data, loading } = useQuery(DEPTS)
 
   const router = useRouter()
-
-  // key: schoolName
-  // values: {deptName1, deptName2}
-
-  // key: deptName
-  // values: deptId
 
   const schoolsMap = new Map()
   data?.result.map((e) => {
@@ -26,13 +24,7 @@ const DeptPage = () => {
     } else {
       schoolsMap.set(e.school, new Array())
     }
-
-    // schoolsMap.has(e.school)
-    //   ? schoolsMap.get(e.school).add(e.department_name)
-    //   : schoolsMap.set(e.school, new Set())
   })
-
-  //data?.result.map((e) => schoolsMap.get(e.school).push(e.department_name))
 
   const deptsMap = new Map()
   data?.result.map((course) =>
@@ -43,38 +35,46 @@ const DeptPage = () => {
   const schoolsArr = Array.from(schoolsMap.keys())
   return (
     <PageLayout>
-      <Container>
+      <Container className="department">
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <Row className="g-2">
+          <>
             {schoolsArr.map((school) => (
               <div>
-                <h1 style={{ textAlign: 'center' }}>{school}</h1>
-                <Row xs={'auto'} md={'auto'} className="g-2">
+                <h1
+                  style={{
+                    textAlign: 'center',
+                    color: textWhite,
+                    paddingTop: '10px',
+                  }}
+                >
+                  {school}
+                </h1>
+                <hr
+                  style={{ marginTop: '0', border: `1px solid ${textWhite}` }}
+                />
+                {/* <ButtonGroup */}
+                <Row
+                  xs={'auto'}
+                  md={'auto'}
+                  className="g-2"
+                  style={{
+                    marginRight: '0',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    paddingBottom: '45px',
+                  }}
+                >
                   {schoolsMap.get(school).map((dept) => (
-                    <Col>
-                      <Card
-                        style={{ width: '18rem' }}
-                        onClick={() =>
-                          router.push(
-                            `../depts/${
-                              (deptsMap.get(dept),
-                              encodeURIComponent(deptsMap.get(dept)))
-                            }`
-                          )
-                        }
-                      >
-                        <Card.Body>
-                          <Card.Title>{dept}</Card.Title>
-                        </Card.Body>
-                      </Card>
-                    </Col>
+                    <Dept dept={dept} deptsMap={deptsMap} router={router} />
                   ))}
+                  {/* </ButtonGroup> */}
                 </Row>
               </div>
             ))}
-          </Row>
+          </>
         )}
       </Container>
     </PageLayout>

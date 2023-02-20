@@ -1,19 +1,30 @@
+$primaryColor: rgb(36, 36, 36);
+$secondaryColor: #2b2d2e;
+$textWhite: rgb(189, 193, 197);
+
 .page-header {
+  background-color: $primaryColor;
+  padding: 10px;
+  .title {
+    color: $textWhite;
+    font-size: 175%;
+  }
 }
+
 .page-body {
   background-color: #202124;
-  height: 100%;
+  height: fit-content;
 }
 
 .page-footer {
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  margin: 100;
   text-align: center;
   background-color: rgb(94, 94, 94);
 }
+
+// HOME PAGE
 
 .search-bar {
   margin-top: 50;
@@ -22,6 +33,8 @@
 .browse-button {
   font-size: large;
 }
+
+// COURSES
 
 .course-cards:nth-child(even) {
   background-color: #252829;
@@ -35,4 +48,20 @@
 
 .list-field:nth-child(odd) {
   background-color: #2e3031;
+}
+
+//  DEPARTMENTS
+
+.deptCard {
+  .dept {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: $textWhite;
+  }
+  :hover {
+    cursor: pointer;
+    background: rgb(68, 64, 64);
+  }
 }

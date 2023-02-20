@@ -1,6 +1,7 @@
 // HOME PAGE
 import { useRouter } from 'next/router'
 import { Button, Container, Form, Row } from 'react-bootstrap'
+import Image from 'react-bootstrap/Image'
 
 import PageLayout from '../components/PageLayout'
 
@@ -9,24 +10,37 @@ const Home = () => {
 
   return (
     <PageLayout>
-      <Container>
+      <Container style={{ height: '100vh' }}>
         <Row>
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicEmail"
-            style={{ marginTop: 250 }}
-          >
-            <Form.Control type="email" placeholder="Search" />
+          <Text variant="light" size="medium">
+            {' '}
+            Hi{' '}
+          </Text>
+        </Row>
+
+        <Row>
+          <Form.Group>
+            className="page-body" style={{ marginTop: 150 }}
+            <Form.Control type="email" placeholder="Search by Department" />
           </Form.Group>
         </Row>
+
+        <Row>
+          <Button variant="light" size="medium">
+            {' '}
+            OR{' '}
+          </Button>
+        </Row>
+
         <Row>
           <Button
             variant="primary"
-            size="lg"
+            size="medium"
             onClick={() => router.push('departments')}
           >
-            Browse
-          </Button>{' '}
+            {' '}
+            Continue{' '}
+          </Button>
         </Row>
       </Container>
     </PageLayout>
