@@ -2,6 +2,8 @@
 
 import { DEPTS } from '@/backend/queries'
 import Dept from '@/components/Dept'
+import Loading from '@/components/Loading'
+import TermSelect from '@/components/TermSelect'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
@@ -35,9 +37,10 @@ const DeptPage = () => {
   const schoolsArr = Array.from(schoolsMap.keys())
   return (
     <PageLayout>
-      <Container className="department">
+      <Container>
+        <TermSelect />
         {loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : (
           <>
             {schoolsArr.map((school) => (
@@ -54,7 +57,6 @@ const DeptPage = () => {
                 <hr
                   style={{ marginTop: '0', border: `1px solid ${textWhite}` }}
                 />
-                {/* <ButtonGroup */}
                 <Row
                   xs={'auto'}
                   md={'auto'}
@@ -70,7 +72,6 @@ const DeptPage = () => {
                   {schoolsMap.get(school).map((dept) => (
                     <Dept dept={dept} deptsMap={deptsMap} router={router} />
                   ))}
-                  {/* </ButtonGroup> */}
                 </Row>
               </div>
             ))}

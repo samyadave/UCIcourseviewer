@@ -2,6 +2,7 @@
 
 import { GET_COURSE, SCHEDULE } from '@/backend/queries'
 import Course from '@/components/Course'
+import Loading from '@/components/Loading'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
@@ -63,13 +64,12 @@ const DeptPage = () => {
   })
   const textWhite = 'rgb(189,193,197)'
   const courseArry = Array.from(courseTitles)
-
   return (
     <PageLayout>
       <Container>
-        <h1 style={{ color: textWhite }}>{title}</h1>
+        <h1 style={{ color: textWhite, textAlign: 'center' }}>{title}</h1>
         {loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : (
           <Accordion defaultActiveKey="0" alwaysOpen>
             {courseArry.map((c) => (
