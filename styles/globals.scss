@@ -1,20 +1,38 @@
-$primaryColor: rgb(36, 36, 36);
-$secondaryColor: #2b2d2e;
+// $primaryColor: rgb(36, 36, 36);
+// $secondaryColor: #2b2d2e;
+// $textWhite: rgb(189, 193, 197);
+
+/*
+Primary Background: #0A2647 
+Footer Color: #031D38 
+Font: Ubuntu
+Main Header size: 42 
+Sub Header size: 32
+Header and footer text size: 16
+Made with ❤️ by INF 151 BestTeam
+*/
+
+$primaryColor: #031d38;
+$secondaryColor: #0a2647;
+$tertiaryColor: #ffd51d;
 $textWhite: rgb(189, 193, 197);
+
+html * {
+  font-family: 'Ubuntu';
+}
 
 .page-header {
   background-color: $primaryColor;
   padding: 10px;
-  .title {
-    color: $textWhite;
-    font-size: 175%;
-  }
+  font-size: 16px;
 }
 
 .page-body {
-  background-color: #202124;
+  background-color: $primaryColor;
+  font-family: Ubuntu;
   display: flex;
-  height: fit-content;
+  height: 200%;
+  min-height: calc(100vh - 34px - 86px);
   padding-top: 25px;
   padding-bottom: 50px;
 }
@@ -22,35 +40,39 @@ $textWhite: rgb(189, 193, 197);
 .page-footer {
   left: 0;
   bottom: 0;
-  width: 100%;
   text-align: center;
-  background-color: rgb(94, 94, 94);
-}
-
-// HOME PAGE
-
-.search-bar {
-  margin-top: 50;
-}
-
-.browse-button {
-  font-size: large;
+  color: $textWhite;
+  background-color: $secondaryColor;
 }
 
 // COURSES
 
-.course-cards:nth-child(even) {
-  background-color: #252829;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+.courses {
+  h1 {
+    color: $tertiaryColor;
+    text-align: center;
+  }
+  .course-cards {
+    font-size: large;
+  }
 
-.course-cards:nth-child(odd) {
-  background-color: #2b2d2e;
-}
+  .course-cards:nth-child(even) {
+    background-color: #252829;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
-.list-field:nth-child(odd) {
-  background-color: #2e3031;
+  .course-cards:nth-child(odd) {
+    background-color: #2b2d2e;
+  }
+
+  .list-field:nth-child(odd) {
+    background-color: #2e3031;
+  }
+
+  hr {
+    color: $tertiaryColor;
+  }
 }
 
 //  DEPARTMENTS
@@ -62,10 +84,12 @@ $textWhite: rgb(189, 193, 197);
     justify-content: center;
     text-align: center;
     color: $textWhite;
+    background-color: #052e5a;
   }
   :hover {
     cursor: pointer;
     background: rgb(68, 64, 64);
+    color: $tertiaryColor;
   }
 }
 
@@ -73,15 +97,75 @@ $textWhite: rgb(189, 193, 197);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .termSelect {
   display: flex;
   flex-direction: row;
-  .selector {
-    margin: 10px;
+  align-items: right;
+
+  select {
+    //align-items: 'right';
+    background-color: $primaryColor;
+    color: $textWhite;
   }
 
-  // align-items: ;
+  .selector {
+    margin: 5px;
+  }
+}
+
+// home page
+.home_page {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+
+  h1 {
+    font-variant: 'Bold';
+    font-size: 65px;
+    color: $textWhite;
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 25px;
+    color: $textWhite;
+    margin-bottom: 70px;
+  }
+
+  input {
+    text-align: left;
+    height: 50px;
+    width: 465px;
+    background-color: $textWhite;
+    color: black;
+    width: 37%;
+    margin: 12px;
+  }
+
+  p {
+    font-size: 25px;
+    color: $textWhite;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin: 12px;
+  }
+
+  button {
+    height: 50px;
+    width: 300px;
+    text-align: left;
+    font-size: 25px;
+    background-color: #052e5a;
+    color: #f9efbc;
+    margin: 12px;
+    outline: 0px;
+  }
+
+  .logo {
+    height: 800px;
+    width: 720px;
+  }
 }

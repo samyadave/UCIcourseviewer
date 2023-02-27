@@ -1,23 +1,13 @@
 // INDIVIDUAL DEPARTMENT PAGE - ALL COURSES IN DEPT
 
-import { GET_COURSE, SCHEDULE } from '@/backend/queries'
+import { SCHEDULE } from '@/backend/queries'
 import Course from '@/components/Course'
 import Loading from '@/components/Loading'
+import TermSelect from '@/components/TermSelect'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Stack,
-  Accordion,
-  useAccordionButton,
-} from 'react-bootstrap'
+import { Container, Accordion, useAccordionButton } from 'react-bootstrap'
 
 import PageLayout from '../../components/PageLayout'
 
@@ -67,21 +57,25 @@ const DeptPage = () => {
   return (
     <PageLayout>
       <Container>
-        <h1 style={{ color: textWhite, textAlign: 'center' }}>{title}</h1>
-        {loading ? (
-          <Loading />
-        ) : (
-          <Accordion defaultActiveKey="0" alwaysOpen>
-            {courseArry.map((c) => (
-              <Course
-                c={c}
-                CustomToggle={CustomToggle}
-                courseMap={courseMap}
-                data={data}
-              />
-            ))}
-          </Accordion>
-        )}
+        <div className="courses">
+          <TermSelect />
+          <h1>{title}</h1>
+          <hr />
+          {loading ? (
+            <Loading />
+          ) : (
+            <Accordion defaultActiveKey="0" alwaysOpen>
+              {courseArry.map((c) => (
+                <Course
+                  c={c}
+                  CustomToggle={CustomToggle}
+                  courseMap={courseMap}
+                  data={data}
+                />
+              ))}
+            </Accordion>
+          )}
+        </div>
       </Container>
     </PageLayout>
   )

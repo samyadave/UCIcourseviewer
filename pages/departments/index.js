@@ -48,14 +48,14 @@ const DeptPage = () => {
                 <h1
                   style={{
                     textAlign: 'center',
-                    color: textWhite,
+                    color: '#FCC200',
                     paddingTop: '10px',
                   }}
                 >
                   {school}
                 </h1>
                 <hr
-                  style={{ marginTop: '0', border: `1px solid ${textWhite}` }}
+                  style={{ marginTop: '0', border: `1.5px solid ${'#FFD404'}` }}
                 />
                 <Row
                   xs={'auto'}
