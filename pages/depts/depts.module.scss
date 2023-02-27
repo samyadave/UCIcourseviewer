@@ -1,0 +1,29 @@
+@import '../../styles/colors';
+
+.courses {
+  h1 {
+    color: $tertiaryColor;
+    text-align: center;
+  }
+  .course-cards {
+    font-size: large;
+  }
+
+  .course-cards:nth-child(even) {
+    background-color: #252829;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .course-cards:nth-child(odd) {
+    background-color: #2b2d2e;
+  }
+
+  .list-field:nth-child(odd) {
+    background-color: #2e3031;
+  }
+
+  hr {
+    color: $tertiaryColor;
+  }
+}

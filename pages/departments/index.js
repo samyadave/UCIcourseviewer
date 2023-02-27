@@ -6,9 +6,9 @@ import Loading from '@/components/Loading'
 import TermSelect from '@/components/TermSelect'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import PageLayout from '../../components/PageLayout'
-// import './index.scss'
+import styles from './index.module.scss'
 
 const textWhite = 'rgb(189,193,197)'
 

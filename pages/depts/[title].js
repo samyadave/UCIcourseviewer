@@ -4,12 +4,15 @@ import { SCHEDULE } from '@/backend/queries'
 import Course from '@/components/Course'
 import Loading from '@/components/Loading'
 import TermSelect from '@/components/TermSelect'
+import TERM from '@/globals'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
 import { Container, Accordion, useAccordionButton } from 'react-bootstrap'
 
 import PageLayout from '../../components/PageLayout'
+
+import styles from './depts.module.scss'
 
 function CustomToggle({ children, eventKey }) {
   return (
@@ -36,8 +39,8 @@ const DeptPage = () => {
 
   const { loading, data } = useQuery(SCHEDULE, {
     variables: {
-      year: 2023,
-      quarter: 'Winter',
+      year: parseInt(TERM.year),
+      quarter: TERM.quarter,
       department: title,
     },
     errorPolicy: 'all',
@@ -57,7 +60,7 @@ const DeptPage = () => {
   return (
     <PageLayout>
       <Container>
-        <div className="courses">
+        <div className={styles.courses}>
           <TermSelect />
           <h1>{title}</h1>
           <hr />

@@ -1,8 +1,7 @@
 ///////
 // HOME PAGE
 import { useRouter } from 'next/router'
-import { Button, Container, Form, Row } from 'react-bootstrap'
-import Image from 'react-bootstrap/Image'
+import { Container, Row } from 'react-bootstrap'
 import { React, useState } from 'react'
 
 import PageLayout from '../components/PageLayout'

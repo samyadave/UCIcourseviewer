@@ -1,7 +1,3 @@
-// $primaryColor: rgb(36, 36, 36);
-// $secondaryColor: #2b2d2e;
-// $textWhite: rgb(189, 193, 197);
-
 /*
 Primary Background: #0A2647 
 Footer Color: #031D38 
@@ -11,12 +7,7 @@ Sub Header size: 32
 Header and footer text size: 16
 Made with ❤️ by INF 151 BestTeam
 */
-
-$primaryColor: #031d38;
-$secondaryColor: #0a2647;
-$tertiaryColor: #ffd51d;
-$textWhite: rgb(189, 193, 197);
-
+@import './colors';
 html * {
   font-family: 'Ubuntu';
 }
