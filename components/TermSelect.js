@@ -1,17 +1,7 @@
 import { Col, Form } from 'react-bootstrap'
-import TERM from '@/globals'
-import { useEffect, useState } from 'react'
 
-const TermSelect = () => {
-  const [currQ, setCurrQ] = useState(TERM.quarter)
-  const [currY, setCurrY] = useState(TERM)
-
-  useEffect(() => {
-    // window.location.reload(false)
-  })
-
-  console.log(currY)
-  console.log(TERM)
+const TermSelect = ({ term, setTerm }) => {
+  const quarters = ['Fall', 'Winter', 'Spring', 'Summer']
 
   return (
     <div className="termSelect">
@@ -19,10 +9,9 @@ const TermSelect = () => {
       <Col className="selector">
         <Form.Select
           aria-label="Year"
-          value={TERM.year}
+          value={term.year}
           onChange={(e) => {
-            setCurrY(e.target.value)
-            TERM.year = e.target.value
+            setTerm({ quarter: term.quarter, year: e.target.value })
           }}
         >
           <option value={2023}>2023</option>
@@ -31,10 +20,18 @@ const TermSelect = () => {
         </Form.Select>
       </Col>
       <Col className="selector">
-        <Form.Select aria-label="Quarter" value={1}>
-          <option value="1">{TERM.quarter}</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <Form.Select
+          aria-label="Quarter"
+          value={term.quarter}
+          onChange={(e) => {
+            setTerm({ quarter: e.target.value, year: term.year })
+          }}
+        >
+          {quarters.map((q) => (
+            <option key={q} value={q}>
+              {q}
+            </option>
+          ))}
         </Form.Select>
       </Col>
     </div>

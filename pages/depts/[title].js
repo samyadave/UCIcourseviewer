@@ -4,15 +4,13 @@ import { SCHEDULE } from '@/backend/queries'
 import Course from '@/components/Course'
 import Loading from '@/components/Loading'
 import TermSelect from '@/components/TermSelect'
-import TERM from '@/globals'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import { Container, Accordion, useAccordionButton } from 'react-bootstrap'
 
 import PageLayout from '../../components/PageLayout'
-
-import styles from './depts.module.scss'
 
 function CustomToggle({ children, eventKey }) {
   return (
@@ -37,10 +35,11 @@ const DeptPage = () => {
   const router = useRouter()
   const { title } = router.query
 
-  const { loading, data } = useQuery(SCHEDULE, {
+  const [term, setTerm] = useState({ year: 2023, quarter: 'Winter' })
+  const { loading, data, error } = useQuery(SCHEDULE, {
     variables: {
-      year: parseInt(TERM.year),
-      quarter: TERM.quarter,
+      year: parseInt(term.year),
+      quarter: term.quarter,
       department: title,
     },
     errorPolicy: 'all',
@@ -48,35 +47,50 @@ const DeptPage = () => {
 
   const courseTitles = new Set()
   const courseMap = new Map()
-  data?.result.map((course) => {
+  data?.result?.map((course) => {
     courseTitles.add(course.course?.title)
     courseMap.set(
       course.course?.title,
       course.course?.department + ' ' + course.course?.number
     )
   })
-  const textWhite = 'rgb(189,193,197)'
+
   const courseArry = Array.from(courseTitles)
+
+  useEffect(() => {
+    setTerm(JSON.parse(window.localStorage.getItem('term')))
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem('term', JSON.stringify(term))
+  }, [term])
+
   return (
     <PageLayout>
       <Container>
-        <div className={styles.courses}>
-          <TermSelect />
+        <div className="courses">
+          <TermSelect term={term} setTerm={setTerm} />
           <h1>{title}</h1>
           <hr />
           {loading ? (
             <Loading />
           ) : (
-            <Accordion defaultActiveKey="0" alwaysOpen>
-              {courseArry.map((c) => (
-                <Course
-                  c={c}
-                  CustomToggle={CustomToggle}
-                  courseMap={courseMap}
-                  data={data}
-                />
-              ))}
-            </Accordion>
+            <>
+              {!data.result || courseArry.length == 0 ? (
+                <h1>{`No ${title} courses found for ${term.quarter} of ${term.year}`}</h1>
+              ) : (
+                <Accordion defaultActiveKey="0" alwaysOpen>
+                  {courseArry.map((c) => (
+                    <Course
+                      c={c}
+                      CustomToggle={CustomToggle}
+                      courseMap={courseMap}
+                      data={data}
+                    />
+                  ))}
+                </Accordion>
+              )}
+            </>
           )}
         </div>
       </Container>
@@ -85,3 +99,7 @@ const DeptPage = () => {
 }
 
 export default DeptPage
+
+{
+  /* {result == null || length(courseArry) ? () :( */
+}

@@ -4,7 +4,7 @@ const textWhite = 'rgb(189,193,197)'
 
 const Course = ({ c, CustomToggle, courseMap, data }) => {
   return (
-    <Card className="course-cards">
+    <Card className="courses course-cards">
       <Card.Header>
         <CustomToggle eventKey={c}>{courseMap.get(c) + ' - ' + c}</CustomToggle>
       </Card.Header>
@@ -41,45 +41,53 @@ const Course = ({ c, CustomToggle, courseMap, data }) => {
                   {/* <ListGroup.Item>{e.course.title}</ListGroup.Item> */}
                   <Col xs={1}>
                     <ListGroup.Item className="list-field">
-                      <p style={{ color: textWhite }}>{e.section.type}</p>
+                      <p style={{ color: textWhite, marginBottom: 0 }}>
+                        {e.section.type}
+                      </p>
                     </ListGroup.Item>
                   </Col>
                   <Col xs={2}>
                     <ListGroup.Item className="list-field">
-                      <p style={{ color: textWhite }}>{e.section.code}</p>
+                      <p style={{ color: textWhite, marginBottom: 0 }}>
+                        {e.section.code}
+                      </p>
                     </ListGroup.Item>
                   </Col>
                   <Col xs={2}>
                     <ListGroup.Item className="list-field">
-                      <p style={{ color: textWhite }}>
+                      <p style={{ color: textWhite, marginBottom: 0 }}>
                         {e.meetings.map((m) => m.days)}
                       </p>
                     </ListGroup.Item>
                   </Col>
                   <Col xs={2}>
                     <ListGroup.Item className="list-field">
-                      <p style={{ color: textWhite }}>
+                      <p style={{ color: textWhite, marginBottom: 0 }}>
                         {e.meetings.map((m) => m.time)}
                       </p>
                     </ListGroup.Item>
                   </Col>
                   <Col xs={2}>
                     <ListGroup.Item className="list-field">
-                      <p style={{ color: textWhite }}>
+                      <p style={{ color: textWhite, marginBottom: 0 }}>
                         {e.meetings.map((m) => m.building)}
                       </p>
                     </ListGroup.Item>
                   </Col>
                   <Col xs={'3'}>
                     <ListGroup.Item className="list-field">
-                      <p style={{ color: textWhite }}>
+                      <p style={{ color: textWhite, marginBottom: 0 }}>
                         {e.instructors.at(0).name == null &&
                         e.instructors.at(-1).name == null ? (
-                          <p>Not available</p>
+                          <p style={{ color: textWhite, marginBottom: 0 }}>
+                            Not available
+                          </p>
                         ) : (
                           <>
                             {e.instructors.map((instructor) => (
-                              <p>{instructor?.name}</p>
+                              <p style={{ color: textWhite, marginBottom: 0 }}>
+                                {instructor?.name}
+                              </p>
                             ))}
                           </>
                         )}

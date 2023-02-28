@@ -38,7 +38,6 @@ const DeptPage = () => {
   return (
     <PageLayout>
       <Container>
-        <TermSelect />
         {loading ? (
           <Loading />
         ) : (

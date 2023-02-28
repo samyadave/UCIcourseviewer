@@ -1,11 +1,12 @@
 ///////
 // HOME PAGE
 import { useRouter } from 'next/router'
-import { Container, Row } from 'react-bootstrap'
+import { Col, Container, Form, Row } from 'react-bootstrap'
 import { React, useState } from 'react'
 
 import PageLayout from '../components/PageLayout'
 import TermSelect from '@/components/TermSelect'
+import styles from './home.module.scss'
 
 const Home = () => {
   const router = useRouter()
@@ -13,29 +14,38 @@ const Home = () => {
   return (
     <PageLayout>
       <Container>
-        <div className="home_page">
-          <TermSelect />
-          <h1 className="home-heading">UCI CourseViewer </h1>
-          <h2 className="home-subheading">Find Your UCI Courses With Ease</h2>
-
+        <div className={styles.home_page}>
           <Row>
-            <input
-              type="text"
-              placeholder=" (In-Progress) Search by Departments 🔎"
-            />
-          </Row>
+            <Col>
+              <h1>UCI CourseViewer </h1>
+              <h2>Find Your UCI Courses With Ease</h2>
+              <Row>
+                <input
+                  type="text"
+                  placeholder=" (In-Progress) Search by Departments 🔎"
+                />
+              </Row>
 
-          <Row>
-            <p>OR</p>
-          </Row>
+              <Row>
+                <p>OR</p>
+              </Row>
 
-          <Row>
-            <button onClick={() => router.push('departments')}>
-              Continue
-              <img src={'arrow.svg'} align="right" width="35px" height="40px" />
-            </button>
+              <Row>
+                <button onClick={() => router.push('departments')}>
+                  Continue
+                  <img
+                    src={'arrow.svg'}
+                    align="right"
+                    width="35px"
+                    height="40px"
+                  />
+                </button>
+              </Row>
+            </Col>
+            <Col>
+              <img src="logo1.png" className={styles.logo} />
+            </Col>
           </Row>
-          <img src="logo1.png" className="logo" />
         </div>
       </Container>
     </PageLayout>

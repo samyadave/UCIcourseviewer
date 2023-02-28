@@ -7,6 +7,18 @@ Sub Header size: 32
 Header and footer text size: 16
 Made with ❤️ by INF 151 BestTeam
 */
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1CzjsGyNPYZvgw.woff2)
+    format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
 @import './colors';
 html * {
   font-family: 'Ubuntu';
@@ -22,7 +34,6 @@ html * {
   background-color: $primaryColor;
   font-family: Ubuntu;
   display: flex;
-  height: 200%;
   min-height: calc(100vh - 34px - 86px);
   padding-top: 25px;
   padding-bottom: 50px;
@@ -45,24 +56,31 @@ html * {
   }
   .course-cards {
     font-size: large;
+    .list-field {
+      outline: 0.5px solid rgb(22, 22, 22);
+      max-height: 43.33px;
+      max-height: fit-content;
+    }
   }
 
   .course-cards:nth-child(even) {
-    background-color: #252829;
+    background-color: $cardColor;
     margin-top: 10px;
     margin-bottom: 10px;
+    .list-field {
+      background-color: $cardColor;
+    }
   }
 
   .course-cards:nth-child(odd) {
-    background-color: #2b2d2e;
-  }
-
-  .list-field:nth-child(odd) {
-    background-color: #2e3031;
+    background-color: adjust-hue($color: $cardColor, $degrees: -4);
+    .list-field {
+      background-color: adjust-hue($color: $cardColor, $degrees: -4);
+    }
   }
 
   hr {
-    color: $tertiaryColor;
+    border: 1.5px solid $tertiaryColor;
   }
 }
 
@@ -75,7 +93,7 @@ html * {
     justify-content: center;
     text-align: center;
     color: $textWhite;
-    background-color: #052e5a;
+    background-color: $cardColor;
   }
   :hover {
     cursor: pointer;
@@ -104,59 +122,5 @@ html * {
 
   .selector {
     margin: 5px;
-  }
-}
-
-// home page
-.home_page {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-
-  h1 {
-    font-variant: 'Bold';
-    font-size: 65px;
-    color: $textWhite;
-    margin-top: 40px;
-  }
-
-  h2 {
-    font-size: 25px;
-    color: $textWhite;
-    margin-bottom: 70px;
-  }
-
-  input {
-    text-align: left;
-    height: 50px;
-    width: 465px;
-    background-color: $textWhite;
-    color: black;
-    width: 37%;
-    margin: 12px;
-  }
-
-  p {
-    font-size: 25px;
-    color: $textWhite;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin: 12px;
-  }
-
-  button {
-    height: 50px;
-    width: 300px;
-    text-align: left;
-    font-size: 25px;
-    background-color: #052e5a;
-    color: #f9efbc;
-    margin: 12px;
-    outline: 0px;
-  }
-
-  .logo {
-    height: 800px;
-    width: 720px;
   }
 }
