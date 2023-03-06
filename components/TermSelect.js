@@ -1,27 +1,29 @@
 import { Col, Form } from 'react-bootstrap'
 
+const years = [...Array(14).keys()].map((i) => 2023 - i) // Creates array of years for term dropdown
+
 const TermSelect = ({ term, setTerm }) => {
   const quarters = ['Fall', 'Winter', 'Spring', 'Summer']
 
   return (
-    <div className="termSelect">
+    <div className='termSelect'>
       <Col xs={9} />
-      <Col className="selector">
+      <Col className='selector'>
         <Form.Select
-          aria-label="Year"
-          value={term.year}
+          aria-label='Year'
+          value={term?.year}
           onChange={(e) => {
             setTerm({ quarter: term.quarter, year: e.target.value })
           }}
         >
-          <option value={2023}>2023</option>
-          <option value={2022}>2022</option>
-          <option value={2021}>2021</option>
+          {years.map((year) => (
+            <option value={year}>{year}</option>
+          ))}
         </Form.Select>
       </Col>
-      <Col className="selector">
+      <Col className='selector'>
         <Form.Select
-          aria-label="Quarter"
+          aria-label='Quarter'
           value={term.quarter}
           onChange={(e) => {
             setTerm({ quarter: e.target.value, year: term.year })

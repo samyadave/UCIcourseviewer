@@ -15,7 +15,7 @@ import PageLayout from '../../components/PageLayout'
 function CustomToggle({ children, eventKey }) {
   return (
     <button
-      type="button"
+      type='button'
       style={{
         border: '0px',
         backgroundColor: 'rgba(52, 52, 52, 0)',
@@ -30,17 +30,18 @@ function CustomToggle({ children, eventKey }) {
     </button>
   )
 }
-
 const DeptPage = () => {
   const router = useRouter()
-  const { title } = router.query
+  const quer = router.query,
+    title = quer[0],
+    code = quer[1]
 
   const [term, setTerm] = useState({ year: 2023, quarter: 'Winter' })
   const { loading, data, error } = useQuery(SCHEDULE, {
     variables: {
-      year: parseInt(term.year),
-      quarter: term.quarter,
-      department: title,
+      year: parseInt(term?.year),
+      quarter: term?.quarter,
+      department: code,
     },
     errorPolicy: 'all',
   })
@@ -68,7 +69,7 @@ const DeptPage = () => {
   return (
     <PageLayout>
       <Container>
-        <div className="courses">
+        <div className='courses'>
           <TermSelect term={term} setTerm={setTerm} />
           <h1>{title}</h1>
           <hr />
@@ -77,9 +78,9 @@ const DeptPage = () => {
           ) : (
             <>
               {!data.result || courseArry.length == 0 ? (
-                <h1>{`No ${title} courses found for ${term.quarter} of ${term.year}`}</h1>
+                <h2>{`No "${title}" courses found for ${term.quarter} of ${term.year}`}</h2>
               ) : (
-                <Accordion defaultActiveKey="0" alwaysOpen>
+                <Accordion defaultActiveKey={['']} alwaysOpen>
                   {courseArry.map((c) => (
                     <Course
                       c={c}
