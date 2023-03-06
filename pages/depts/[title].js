@@ -15,7 +15,7 @@ import PageLayout from '../../components/PageLayout'
 function CustomToggle({ children, eventKey }) {
   return (
     <button
-      type='button'
+      type="button"
       style={{
         border: '0px',
         backgroundColor: 'rgba(52, 52, 52, 0)',
@@ -69,7 +69,7 @@ const DeptPage = () => {
   return (
     <PageLayout>
       <Container>
-        <div className='courses'>
+        <div className="courses">
           <TermSelect term={term} setTerm={setTerm} />
           <h1>{title}</h1>
           <hr />
@@ -77,7 +77,7 @@ const DeptPage = () => {
             <Loading />
           ) : (
             <>
-              {!data.result || courseArry.length == 0 ? (
+              {!data?.result || courseArry.length == 0 ? (
                 <h2>{`No "${title}" courses found for ${term.quarter} of ${term.year}`}</h2>
               ) : (
                 <Accordion defaultActiveKey={['']} alwaysOpen>
