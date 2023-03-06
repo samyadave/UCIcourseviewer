@@ -5,18 +5,17 @@ const Dept = ({ dept, deptsMap, router }) => {
     <Col style={{ width: '25%' }}>
       <Card
         style={{ height: '5rem', textAlign: 'center' }}
-        bg="dark"
-        text="light"
-        className="deptCard"
+        bg='dark'
+        text='light'
+        className='deptCard'
         onClick={() =>
-          router.push(
-            `../depts/${
-              (deptsMap.get(dept), encodeURIComponent(deptsMap.get(dept)))
-            }`
-          )
+          router.push({
+            pathname: `../depts/${encodeURIComponent(deptsMap.get(dept))}`,
+            query: [dept, deptsMap.get(dept)],
+          })
         }
       >
-        <Card.Body className="dept">
+        <Card.Body className='dept'>
           <Card.Title
             style={{
               marginBottom: '0',
