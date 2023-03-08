@@ -1,6 +1,5 @@
 import '../styles/globals.scss'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import '../globals.js'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({

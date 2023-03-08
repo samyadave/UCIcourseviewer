@@ -2,6 +2,9 @@
   "name": "uci_cv",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +14,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.5",
     "@next/font": "13.1.5",
+    "@prisma/client": "^4.11.0",
     "apollo-server-micro": "^3.12.0",
     "axios": "^1.2.6",
     "bootstrap": "5.1.0",

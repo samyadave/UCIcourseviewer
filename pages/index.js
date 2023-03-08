@@ -5,7 +5,6 @@ import { Col, Container, Form, Row } from 'react-bootstrap'
 import { React, useState } from 'react'
 
 import PageLayout from '../components/PageLayout'
-import TermSelect from '@/components/TermSelect'
 import styles from './home.module.scss'
 
 const Home = () => {

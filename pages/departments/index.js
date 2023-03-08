@@ -3,12 +3,10 @@
 import { DEPTS } from '@/backend/queries'
 import Dept from '@/components/Dept'
 import Loading from '@/components/Loading'
-import TermSelect from '@/components/TermSelect'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { Container, Row } from 'react-bootstrap'
 import PageLayout from '../../components/PageLayout'
-import styles from './index.module.scss'
 
 const textWhite = 'rgb(189,193,197)'
 
