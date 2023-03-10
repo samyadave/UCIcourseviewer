@@ -1,6 +1,6 @@
 import { Card, Col } from 'react-bootstrap'
 
-const Dept = ({ dept, deptsMap, router }) => {
+const Dept = ({ dept, router }) => {
   return (
     <Col style={{ width: '25%' }}>
       <Card
@@ -8,13 +8,7 @@ const Dept = ({ dept, deptsMap, router }) => {
         bg="dark"
         text="light"
         className="deptCard"
-        onClick={() =>
-          router.push(
-            `../depts/${
-              (deptsMap.get(dept), encodeURIComponent(deptsMap.get(dept)))
-            }`
-          )
-        }
+        onClick={() => router.push(`../depts/${dept.code}`)}
       >
         <Card.Body className="dept">
           <Card.Title
@@ -22,7 +16,7 @@ const Dept = ({ dept, deptsMap, router }) => {
               marginBottom: '0',
             }}
           >
-            {dept}
+            {dept.name}
           </Card.Title>
         </Card.Body>
       </Card>

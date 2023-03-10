@@ -54,6 +54,13 @@ html * {
     color: $tertiaryColor;
     text-align: center;
   }
+
+  h2 {
+    color: $tertiaryColor;
+    text-align: center;
+    size: 30px;
+  }
+
   .course-cards {
     font-size: large;
     .list-field {

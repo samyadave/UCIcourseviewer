@@ -1,15 +1,30 @@
 ///////
 // HOME PAGE
 import { useRouter } from 'next/router'
-import { Col, Container, Form, Row } from 'react-bootstrap'
-import { React, useState } from 'react'
+import {
+  Col,
+  Container,
+  Form,
+  ListGroup,
+  ListGroupItem,
+  Row,
+} from 'react-bootstrap'
+import { React, useEffect, useState } from 'react'
 
 import PageLayout from '../components/PageLayout'
-import TermSelect from '@/components/TermSelect'
 import styles from './home.module.scss'
+import { useLazyQuery } from '@apollo/client'
+import Loading from '@/components/Loading'
+import { SEARCH_QUERY } from '@/backend/queries'
 
 const Home = () => {
   const router = useRouter()
+  const [currSearch, setSearch] = useState('')
+
+  // search is function to call query
+  const [search, { data, loading }] = useLazyQuery(SEARCH_QUERY, {
+    variables: { text: `%${currSearch}%` },
+  })
 
   return (
     <PageLayout>
@@ -23,7 +38,30 @@ const Home = () => {
                 <input
                   type="text"
                   placeholder=" (In-Progress) Search by Departments 🔎"
+                  value={currSearch}
+                  onChange={(e) => {
+                    setSearch(e.target.value)
+                    search(currSearch)
+                  }}
                 />
+
+                {loading ? (
+                  <ListGroupItem>
+                    <Loading />
+                  </ListGroupItem>
+                ) : (
+                  data && (
+                    <ListGroup>
+                      {data.Dept.map((e) => (
+                        <ListGroupItem
+                          onClick={() => router.push(`depts/${e.code}`)}
+                        >
+                          {e.name}
+                        </ListGroupItem>
+                      ))}
+                    </ListGroup>
+                  )
+                )}
               </Row>
 
               <Row>

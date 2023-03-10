@@ -5,25 +5,43 @@
     color: $tertiaryColor;
     text-align: center;
   }
-  .course_cards {
-    font-size: large;
+
+  h2 {
+    color: $tertiaryColor;
+    text-align: center;
+    size: 30px;
   }
 
-  //   .course_cards:nth-child(even) {
-  //     background-color: #252829;
-  //     margin-top: 10px;
-  //     margin-bottom: 10px;
-  //   }
-
-  //   .course_cards:nth-child(odd) {
-  //     background-color: #2b2d2e;
-  //   }
-
-  //   .list-field:nth-child(odd) {
-  //     background-color: #2e3031;
-  //   }
-
   hr {
-    color: $tertiaryColor;
+    border: 1.5px solid $tertiaryColor;
+  }
+
+  Col {
+    color: $textWhite;
+  }
+}
+
+.courseCards {
+  font-size: large;
+  .list-field {
+    outline: 0.5px solid rgb(22, 22, 22);
+    max-height: 43.33px;
+    max-height: fit-content;
+  }
+}
+
+.courseCards:nth-child(even) {
+  background-color: $cardColor;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  .list-field {
+    background-color: $cardColor;
+  }
+}
+
+.courseCards:nth-child(odd) {
+  background-color: adjust-hue($color: $cardColor, $degrees: -4);
+  .list-field {
+    background-color: adjust-hue($color: $cardColor, $degrees: -4);
   }
 }
