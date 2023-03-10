@@ -76,7 +76,7 @@ const seedCourse = async () => {
         school
         title
         units
-        
+        days
       }
       }`,
     },

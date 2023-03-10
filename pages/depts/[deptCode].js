@@ -1,6 +1,6 @@
 // INDIVIDUAL DEPARTMENT PAGE - ALL COURSES IN DEPT
 
-import { SCHEDULE } from '@/backend/queries'
+import { GET_DEPT, SCHEDULE } from '@/backend/queries'
 import Course from '@/components/Course'
 import Loading from '@/components/Loading'
 import TermSelect from '@/components/TermSelect'
@@ -24,7 +24,6 @@ function CustomToggle({ children, eventKey }) {
         width: '100%',
       }}
       onClick={useAccordionButton(eventKey)}
-      flush
     >
       {children}
     </button>
@@ -32,17 +31,21 @@ function CustomToggle({ children, eventKey }) {
 }
 const DeptPage = () => {
   const router = useRouter()
-  const quer = router.query,
-    title = quer[0],
-    code = quer[1]
+
+  const { deptCode } = router.query
+
+  const { data: deptData } = useQuery(GET_DEPT, {
+    variables: { code: deptCode },
+  })
 
   const [term, setTerm] = useState({ year: 2023, quarter: 'Winter' })
   const { loading, data, error } = useQuery(SCHEDULE, {
     variables: {
       year: parseInt(term?.year),
       quarter: term?.quarter,
-      department: code,
+      department: deptCode,
     },
+    context: { clientName: 'peterportalAPI' },
     errorPolicy: 'all',
   })
 
@@ -71,22 +74,26 @@ const DeptPage = () => {
       <Container>
         <div className="courses">
           <TermSelect term={term} setTerm={setTerm} />
-          <h1>{title}</h1>
+          <h1>{deptData?.result.name}</h1>
           <hr />
           {loading ? (
             <Loading />
           ) : (
             <>
               {!data?.result || courseArry.length == 0 ? (
-                <h2>{`No "${title}" courses found for ${term.quarter} of ${term.year}`}</h2>
+                <h2>{`No "${deptData?.result.name}" courses found for ${term.quarter} of ${term.year}`}</h2>
               ) : (
                 <Accordion defaultActiveKey={['']} alwaysOpen>
                   {courseArry.map((c) => (
                     <Course
                       c={c}
+                      key={c}
                       CustomToggle={CustomToggle}
                       courseMap={courseMap}
                       data={data}
+                      courses={data?.result.filter(
+                        ({ course }) => course?.title === c
+                      )}
                     />
                   ))}
                 </Accordion>
@@ -100,7 +107,3 @@ const DeptPage = () => {
 }
 
 export default DeptPage
-
-{
-  /* {result == null || length(courseArry) ? () :( */
-}

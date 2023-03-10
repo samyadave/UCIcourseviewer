@@ -72,3 +72,34 @@ export const DEPTS = gql`
     }
   }
 `
+export const SEARCH_QUERY = gql`
+  query Search($text: String) {
+    Dept(order_by: { name: asc }, where: { name: { _ilike: $text } }) {
+      schoolName
+      name
+      code
+    }
+  }
+`
+
+export const SCHOOLS = gql`
+  query SCHOOLS {
+    result: school {
+      name
+      Depts(order_by: { name: asc }) {
+        code
+        name
+        schoolName
+      }
+    }
+  }
+`
+export const GET_DEPT = gql`
+  query getDept($code: String!) {
+    result: Dept_by_pk(code: $code) {
+      code
+      name
+      schoolName
+    }
+  }
+`

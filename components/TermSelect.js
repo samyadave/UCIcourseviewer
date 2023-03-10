@@ -6,24 +6,26 @@ const TermSelect = ({ term, setTerm }) => {
   const quarters = ['Fall', 'Winter', 'Spring', 'Summer']
 
   return (
-    <div className='termSelect'>
+    <div className="termSelect">
       <Col xs={9} />
-      <Col className='selector'>
+      <Col className="selector">
         <Form.Select
-          aria-label='Year'
+          aria-label="Year"
           value={term?.year}
           onChange={(e) => {
             setTerm({ quarter: term.quarter, year: e.target.value })
           }}
         >
           {years.map((year) => (
-            <option value={year}>{year}</option>
+            <option key={year} value={year}>
+              {year}
+            </option>
           ))}
         </Form.Select>
       </Col>
-      <Col className='selector'>
+      <Col className="selector">
         <Form.Select
-          aria-label='Quarter'
+          aria-label="Quarter"
           value={term.quarter}
           onChange={(e) => {
             setTerm({ quarter: e.target.value, year: term.year })
