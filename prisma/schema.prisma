@@ -9,3 +9,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// deptname, deptcode, school
+
+model school {
+  name   String   @unique
+  depts  Dept[]
+  Course Course[]
+}
+
+model Dept {
+  name       String
+  code       String   @unique
+  courses    Course[]
+  school     school?  @relation(fields: [schoolName], references: [name])
+  schoolName String?
+}
+
+model Course {
+  id         String    @unique // deptCode + course num (eg. IN4MATX 113)
+  title      String
+  number     String
+  deptCode   String
+  dept       Dept      @relation(fields: [deptCode], references: [code])
+  classes    Section[]
+  school     school?   @relation(fields: [schoolName], references: [name])
+  schoolName String?
+}
+
+model Section {
+  crn         Int      @unique
+  instructors String[]
+  type        String
+  units       Float
+  days        String[]
+  times       String[]
+  building    String[]
+  courseId    String // deptCode + course num (eg. IN4MATX 113)
+  course      Course   @relation(fields: [courseId], references: [id])
+}

@@ -1,109 +1,115 @@
 import { Accordion, Card, Col, ListGroup } from 'react-bootstrap'
+import styles from './Course.module.scss'
 
 const textWhite = 'rgb(189,193,197)'
 
-const Course = ({ c, CustomToggle, courseMap, data }) => {
+const Course = ({ c, CustomToggle, courseMap, data, courses }) => {
   return (
-    <Card className='courses course-cards'>
+    <Card className={`courses course-cards `}>
       <Card.Header>
         <CustomToggle eventKey={c}>{courseMap.get(c) + ' - ' + c}</CustomToggle>
       </Card.Header>
       <Accordion.Collapse eventKey={c}>
         <Card.Body>
           <ListGroup horizontal style={{ width: '95%', textAlign: 'center' }}>
-            <Col style={{ color: textWhite }} xs={1}>
+            <Col key={'section'} style={{ color: textWhite }} xs={1}>
               Section
             </Col>
-            <Col style={{ color: textWhite }} xs={2}>
+            <Col key={'CRN'} style={{ color: textWhite }} xs={2}>
               CRN
             </Col>
-            <Col style={{ color: textWhite }} xs={2}>
+            <Col key={'Days'} style={{ color: textWhite }} xs={2}>
               Days
             </Col>
-            <Col style={{ color: textWhite }} xs={2}>
+            <Col key={'Time'} style={{ color: textWhite }} xs={2}>
               Time
             </Col>
-            <Col style={{ color: textWhite }} xs={2}>
+            <Col key={'Building'} style={{ color: textWhite }} xs={2}>
               Building
             </Col>
-            <Col style={{ color: textWhite }} xs={2}>
+            <Col key={'Instructors'} style={{ color: textWhite }} xs={2}>
               Instructors
             </Col>
           </ListGroup>
-          {data?.result.map((e) => {
-            return e.course?.title == c ? (
-              <>
-                <ListGroup
-                  horizontal
-                  className='list-group-flush'
-                  style={{ width: '100v' }}
-                >
-                  {/* <ListGroup.Item>{e.course.title}</ListGroup.Item> */}
-                  <Col xs={1}>
-                    <ListGroup.Item className='list-field'>
-                      <p style={{ color: textWhite, marginBottom: 0 }}>
-                        {e.section.type ? e.section.type : 'Not Available'}
+
+          {courses.map((course) => (
+            <div>
+              <ListGroup
+                horizontal
+                className="list-group-flush"
+                style={{ width: '100v' }}
+              >
+                <Col key={'section'} xs={1}>
+                  <ListGroup.Item className="list-field">
+                    <p style={{ color: textWhite, marginBottom: 0 }}>
+                      {course.section.type
+                        ? course.section.type
+                        : 'Not Available'}
+                    </p>
+                  </ListGroup.Item>
+                </Col>
+                <Col key={'CRN'} xs={2}>
+                  <ListGroup.Item className="list-field">
+                    <p style={{ color: textWhite, marginBottom: 0 }}>
+                      {course.section.code
+                        ? course.section.code
+                        : 'Not Available'}
+                    </p>
+                  </ListGroup.Item>
+                </Col>
+                <Col key={'Meetings'} xs={2}>
+                  <ListGroup.Item className="list-field">
+                    {course.meetings.map((m) => (
+                      <p key={m} style={{ color: textWhite, marginBottom: 0 }}>
+                        {m.days ? m.days : 'Not Available'}
                       </p>
-                    </ListGroup.Item>
-                  </Col>
-                  <Col xs={2}>
-                    <ListGroup.Item className='list-field'>
-                      <p style={{ color: textWhite, marginBottom: 0 }}>
-                        {e.section.code ? e.section.code : 'Not Available'}
+                    ))}
+                  </ListGroup.Item>
+                </Col>
+                <Col key={'Time'} xs={2}>
+                  <ListGroup.Item className="list-field">
+                    <p style={{ color: textWhite, marginBottom: 0 }}>
+                      {course.meetings.map((m) =>
+                        m.time ? m.time : 'Not Available'
+                      )}
+                    </p>
+                  </ListGroup.Item>
+                </Col>
+                <Col key={'Building'} xs={2}>
+                  <ListGroup.Item className="list-field">
+                    {course.meetings.map((m) => (
+                      <p k={m} style={{ color: textWhite, marginBottom: 0 }}>
+                        {m.building ? m.building : 'Not Available'}
                       </p>
-                    </ListGroup.Item>
-                  </Col>
-                  <Col xs={2}>
-                    <ListGroup.Item className='list-field'>
-                      <p style={{ color: textWhite, marginBottom: 0 }}>
-                        {e.meetings.map((m) =>
-                          m.days ? m.days : 'Not Available'
-                        )}
-                      </p>
-                    </ListGroup.Item>
-                  </Col>
-                  <Col xs={2}>
-                    <ListGroup.Item className='list-field'>
-                      <p style={{ color: textWhite, marginBottom: 0 }}>
-                        {e.meetings.map((m) =>
-                          m.time ? m.time : 'Not Available'
-                        )}
-                      </p>
-                    </ListGroup.Item>
-                  </Col>
-                  <Col xs={2}>
-                    <ListGroup.Item className='list-field'>
-                      <p style={{ color: textWhite, marginBottom: 0 }}>
-                        {e.meetings.map((m) =>
-                          m.building ? m.building : 'Not Available'
-                        )}
-                      </p>
-                    </ListGroup.Item>
-                  </Col>
-                  <Col xs={'3'}>
-                    <ListGroup.Item className='list-field'>
-                      <p style={{ color: textWhite, marginBottom: 0 }}>
-                        {e.instructors.at(0).name == null &&
-                        e.instructors.at(-1).name == null ? (
-                          <p style={{ color: textWhite, marginBottom: 0 }}>
-                            Not available
-                          </p>
-                        ) : (
-                          <>
-                            {e.instructors.map((instructor) => (
-                              <p style={{ color: textWhite, marginBottom: 0 }}>
-                                {instructor?.name}
-                              </p>
-                            ))}
-                          </>
-                        )}
-                      </p>
-                    </ListGroup.Item>
-                  </Col>
-                </ListGroup>
-              </>
-            ) : null
-          })}
+                    ))}
+                  </ListGroup.Item>
+                </Col>
+                <Col key={'Instructors'} xs={'3'}>
+                  <ListGroup.Item className="list-field">
+                    <div style={{ color: textWhite, marginBottom: 0 }}>
+                      {course.instructors.at(0).name == null &&
+                      course.instructors.at(-1).name == null ? (
+                        <p style={{ color: textWhite, marginBottom: 0 }}>
+                          Not available
+                        </p>
+                      ) : (
+                        <>
+                          {course.instructors.map((instructor) => (
+                            <p
+                              key={course.course?.code}
+                              style={{ color: textWhite, marginBottom: 0 }}
+                            >
+                              {instructor?.name}
+                            </p>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  </ListGroup.Item>
+                </Col>
+              </ListGroup>
+            </div>
+          ))}
         </Card.Body>
       </Accordion.Collapse>
     </Card>
